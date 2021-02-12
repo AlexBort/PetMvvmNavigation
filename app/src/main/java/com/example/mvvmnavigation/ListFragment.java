@@ -23,7 +23,8 @@ public class ListFragment extends Fragment {
     super.onCreate(savedInstanceState);
     viewModel = new ViewModelProvider(this).get(ListViewModel.class);
     getLifecycle().addObserver(viewModel);
-    viewModel.getData().observe(this, new Observer<List<String>>() {
+    viewModel.getData().observe(this,
+        new Observer<List<String>>() {
       @Override
       public void onChanged(List<String> strings) {
         Log.d("TEST", strings.toString());
