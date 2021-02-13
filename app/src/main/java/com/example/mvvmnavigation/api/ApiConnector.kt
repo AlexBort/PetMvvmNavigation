@@ -13,7 +13,7 @@ class ApiConnector {
     private var requestsApi: IRequestsApi
 
     init {
-        requestsApi = createRetrofitBuilder()!!.create<IRequestsApi>(IRequestsApi::class)
+        requestsApi = createRetrofitBuilder()!!.create(IRequestsApi::class.java)
     }
 
     private fun createRetrofitBuilder(): Retrofit? {
@@ -28,15 +28,16 @@ class ApiConnector {
                 .build()
     }
 
-    fun sendRequestInfoList(listener: ResponseCallback) {
-        val call: Call<IResponse> = requestsApi.getResults(20)
-        call.enqueue(object : Callback<ServerResponse?> {
-            override fun onResponse(call: Call<ServerResponse?>, response: Response<ServerResponse?>) {
-                listener.successResponse(response.body())
+    fun sendRequestInfoList(callback: ResponseCallback<ManResponse>) {
+        val call: Call<ManResponse?>? = requestsApi.getResults(20)
+
+        call?.enqueue(object : Callback<ManResponse?> {
+            override fun onResponse(call: Call<ManResponse?>, response: Response<ManResponse?>) {
+                callback.onSuccess(response.body()!!)
             }
 
-            override fun onFailure(call: Call<ServerResponse?>, t: Throwable) {
-                listener.failureResponse()
+            override fun onFailure(call: Call<ManResponse?>, t: Throwable) {
+                callback.onError(t)
             }
         })
     }

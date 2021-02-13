@@ -5,14 +5,15 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import com.example.mvvmnavigation.databinding.FragmentListBinding;
+import com.example.mvvmnavigation.models.User;
 import java.util.List;
-import java.util.logging.Logger;
 
 public class ListFragment extends Fragment {
 
@@ -35,8 +36,15 @@ public class ListFragment extends Fragment {
   @Nullable
   @Override
   public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-    FragmentListBinding view = FragmentListBinding.inflate(inflater, container, false);
+    final FragmentListBinding view = FragmentListBinding.inflate(inflater, container, false);
     view.setViewmodel(viewModel);
+    final ListView listView = view.listView;
+    viewModel.getUsersList().observe(this, new Observer<List<User>>() {
+      @Override
+      public void onChanged(List<User> list) {
+        listView.setAdapter(new UserListAdapter(getContext(), list));
+      }
+    });
     return view.getRoot();
   }
 }

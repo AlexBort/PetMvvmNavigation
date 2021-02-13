@@ -1,6 +1,6 @@
 package com.example.mvvmnavigation.api
 
-interface ResponseCallback {
-    fun onSuccess()
-    fun onError()
+interface ResponseCallback<T : IResponse?> {
+    fun onSuccess(response: T)
+    fun onError(throwable: Throwable)
 }
