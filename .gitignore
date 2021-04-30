@@ -12,3 +12,7 @@
 /captures
 .externalNativeBuild
 .cxx
+vcs.xml
+gradle.xml
+compiler.xml
+misc.xml
