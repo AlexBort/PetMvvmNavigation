@@ -8,7 +8,7 @@ import android.util.Log;
 public class ExampleLooperThread extends Thread {
 
   String TAG = getClass().getName();
-
+  public Looper looper;
   public Handler handler; // handler is associated to thread for which it's attached.
   // Therefore there is handler will attach to background thread
 
@@ -20,6 +20,7 @@ public class ExampleLooperThread extends Thread {
      * therefore we will init Handler with Looper:
      */
     Looper.prepare(); // it 1- will add looper to this background thread and 2- and it automatically create the message queue
+    looper = Looper.myLooper();
     handler = new Handler();
     Looper.loop(); // we will be in infinite for Loop ()
 

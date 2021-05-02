@@ -42,16 +42,19 @@ public class MainActivity extends AppCompatActivity {
   }
 
   public void stopThread(View view) {
+    looperThread.looper.quit();
   }
 
   public void taskA(View view) {
-    looperThread.handler.post(new Runnable() {
+    Handler handler = new Handler(looperThread.looper);
+
+    handler.post(new Runnable() {
       @Override
       public void run() {
         for (int i = 0; i < 5; i++) {
           Log.v(TAG, "run() " + i);
           SystemClock.sleep(1000);
-          button.setEnabled(false);
+//          button.setEnabled(false); // it will work. So this handler is able to work with UI thread
         }
       }
     });
