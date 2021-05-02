@@ -14,6 +14,15 @@ public class ExampleLooperThread extends Thread {
 
   @Override
   public void run() {
+  //    handler = new Handler(); // in such case we will get crash, because:  java.lang.RuntimeException: Can't create handler inside thread Thread[Thread-2,5,main] that has not called Looper.prepare()
+    /**
+     * Handler is working with Looper and MessageQuee
+     * therefore we will init Handler with Looper:
+     */
+    Looper.prepare(); // it 1- will add looper to this background thread and 2- and it automatically create the message queue
+    handler = new Handler();
+    Looper.loop();
+
     for (int i = 0; i < 5; i++) {
       Log.v(TAG, "run(): " + i);
       SystemClock.sleep(1000);
