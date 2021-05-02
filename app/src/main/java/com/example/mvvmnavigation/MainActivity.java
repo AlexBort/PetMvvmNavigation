@@ -18,52 +18,32 @@ public class MainActivity extends AppCompatActivity {
   final int STATUS_NONE = 0; // нет подключения
   final int STATUS_CONNECTING = 1; // подключаемся
   final int STATUS_CONNECTED = 2; // подключено
+  private static final String TAG = "MainActivity";
+  ExampleLooperThread looperThread = new ExampleLooperThread();
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
-    final TextView text = findViewById(R.id.text);
-    Button button = findViewById(R.id.launch_thread);
 
-    handler = new Handler(Looper.myLooper()) {
-      @Override
-      public void handleMessage(@NonNull Message msg) {
-        switch (msg.what) {
-          case STATUS_NONE:
-            text.setText("Not connected");
-            break;
-          case STATUS_CONNECTING:
-            text.setText("Connecting");
-            break;
-          case STATUS_CONNECTED:
-            text.setText("Connected");
-            break;
-        }
-      }
-    };
+    }
 
-    button.setOnClickListener(new OnClickListener() {
-      @Override
-      public void onClick(View v) {
-        new Thread(new Runnable() {
-          @Override
-          public void run() {
-            try {
-              handler.sendEmptyMessage(STATUS_CONNECTING);
-              TimeUnit.SECONDS.sleep(2);
-              // установлено
-              handler.sendEmptyMessage(STATUS_CONNECTED);
-              // выполняется какая-то работа
-              TimeUnit.SECONDS.sleep(3);
-              // разрываем подключение
-              handler.sendEmptyMessage(STATUS_NONE);
-            } catch (InterruptedException e) {
-              e.printStackTrace();
-            }
-          }
-        });
-      }
-    });
+
+  /**
+   *
+   * we try to start thread again, it will not be possible
+   *
+   */
+  public void startThread(View view) {
+    looperThread.start();
+  }
+
+  public void stopThread(View view) {
+  }
+
+  public void taskA(View view) {
+  }
+
+  public void taskB(View view) {
   }
 }
