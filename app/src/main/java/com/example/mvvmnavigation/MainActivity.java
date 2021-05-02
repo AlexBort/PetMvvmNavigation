@@ -3,6 +3,8 @@ package com.example.mvvmnavigation;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
+import android.os.SystemClock;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -20,13 +22,14 @@ public class MainActivity extends AppCompatActivity {
   final int STATUS_CONNECTED = 2; // подключено
   private static final String TAG = "MainActivity";
   ExampleLooperThread looperThread = new ExampleLooperThread();
+  Button button;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
-
-    }
+    button = findViewById(R.id.button_start);
+  }
 
 
   /**
@@ -42,6 +45,16 @@ public class MainActivity extends AppCompatActivity {
   }
 
   public void taskA(View view) {
+    looperThread.handler.post(new Runnable() {
+      @Override
+      public void run() {
+        for (int i = 0; i < 5; i++) {
+          Log.v(TAG, "run() " + i);
+          SystemClock.sleep(1000);
+          button.setEnabled(false);
+        }
+      }
+    });
   }
 
   public void taskB(View view) {
