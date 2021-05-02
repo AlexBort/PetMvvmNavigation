@@ -46,18 +46,21 @@ public class MainActivity extends AppCompatActivity {
   }
 
   public void taskA(View view) {
-    Handler handler = new Handler(looperThread.looper);
+    if (looperThread.looper != null) {
+      Handler handler = new Handler(looperThread.looper);
 
-    handler.post(new Runnable() {
-      @Override
-      public void run() {
-        for (int i = 0; i < 5; i++) {
-          Log.v(TAG, "run() " + i);
-          SystemClock.sleep(1000);
+      handler.post(new Runnable() {
+        @Override
+        public void run() {
+          for (int i = 0; i < 5; i++) {
+            Log.v(TAG, "run() " + i);
+            SystemClock.sleep(1000);
 //          button.setEnabled(false); // it will work. So this handler is able to work with UI thread
+          }
         }
-      }
-    });
+      });
+    }
+
   }
 
   public void taskB(View view) {
