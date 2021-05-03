@@ -1,5 +1,8 @@
 package com.example.mvvmnavigation;
 
+import static com.example.mvvmnavigation.ExampleHandler.TASK_A;
+import static com.example.mvvmnavigation.ExampleHandler.TASK_B;
+
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
@@ -46,23 +49,14 @@ public class MainActivity extends AppCompatActivity {
   }
 
   public void taskA(View view) {
-    if (looperThread.looper != null) {
-      Handler handler = new Handler(looperThread.looper);
-
-      handler.post(new Runnable() {
-        @Override
-        public void run() {
-          for (int i = 0; i < 5; i++) {
-            Log.v(TAG, "run() " + i);
-            SystemClock.sleep(1000);
-//          button.setEnabled(false); // it will work. So this handler is able to work with UI thread
-          }
-        }
-      });
-    }
-
+    Message msg = Message.obtain();
+    msg.what = TASK_A;
+    looperThread.handler.sendMessage(msg);
   }
 
   public void taskB(View view) {
+    Message msg = Message.obtain();
+    msg.what = TASK_B;
+    looperThread.handler.sendMessage(msg);
   }
 }

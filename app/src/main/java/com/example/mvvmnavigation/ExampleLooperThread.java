@@ -21,7 +21,7 @@ public class ExampleLooperThread extends Thread {
      */
     Looper.prepare(); // it 1- will add looper to this background thread and 2- and it automatically create the message queue
     looper = Looper.myLooper();
-    handler = new Handler();
+    handler = new ExampleHandler();
     Looper.loop(); // we will be in infinite for Loop ()
 
     Log.v(TAG, "run(): " + "end"); // when operations of method run() will be finished Thread will be destroyed
