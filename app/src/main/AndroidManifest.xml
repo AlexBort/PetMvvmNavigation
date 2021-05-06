@@ -19,6 +19,8 @@
         <category android:name="android.intent.category.LAUNCHER" />
       </intent-filter>
     </activity>
+    <service android:name=".TestService"
+      android:exported="false"/> <!--если не хотим ее делать доступной для других приложений, тогда проставляем exported=false-->
   </application>
 
 </manifest>
