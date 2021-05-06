@@ -4,7 +4,10 @@ import android.app.IntentService
 import android.content.Intent
 import android.util.Log
 
-class TestService(name: String?) : IntentService(TestService::class.java.simpleName) {
+class TestService() : IntentService(TestService::class.java.simpleName) {
+
+    constructor(name: String?) : this() {
+    }
 
     private val TAG = "TestService"
 
@@ -31,10 +34,15 @@ class TestService(name: String?) : IntentService(TestService::class.java.simpleN
     Но есть IntentService, который также наследуется от Service
      */
 
-    /**
-     * этот метод не нужно переопределять, он уже переопределен с возвратном нуля
-     */
-//    fun onBind()
+    override fun onCreate() {
+        super.onCreate()
+        Log.v(TAG, "onCreate: ")
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        Log.v(TAG, "onDestroy: ")
+    }
 
     fun calculateSomething() {
         Log.v(TAG, "calculate: ")
