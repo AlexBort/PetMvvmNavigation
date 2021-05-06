@@ -13,7 +13,9 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import com.example.mvvmnavigation.databinding.FragmentListBinding;
 import com.example.mvvmnavigation.models.User;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class ListFragment extends Fragment {
 
@@ -26,11 +28,17 @@ public class ListFragment extends Fragment {
     getLifecycle().addObserver(viewModel);
     viewModel.getData().observe(this,
         new Observer<List<String>>() {
-      @Override
-      public void onChanged(List<String> strings) {
-        Log.d("TEST", strings.toString());
-      }
-    });
+          @Override
+          public void onChanged(List<String> strings) {
+            Log.d("TEST", strings.toString());
+          }
+        });
+
+    Set<TaskListener> listeners = new HashSet<>();
+    for (TaskListener taskListener:
+    listeners) {
+
+    }
   }
 
   @Nullable

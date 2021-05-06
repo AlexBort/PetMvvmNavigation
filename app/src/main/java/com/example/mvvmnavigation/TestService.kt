@@ -4,9 +4,17 @@ import android.app.IntentService
 import android.content.Intent
 import android.util.Log
 
-class TestService() : IntentService(TestService::class.java.simpleName) {
+class TestService : IntentService {
+
+    constructor() : super((TestService::class.java.simpleName)) {
+        /**
+         * IntentService экстендится от обычного Service. Service в свою очередь от ContextWrapper, он же от Context.
+         * Благодаря этому, из сервиса мы можем достучаться к Context-y, а соответственно к appContext, и через него комуницировать с              другими компонентами приложения, в данном случае с activity, которое его вызвало
+         */
+    }
 
     constructor(name: String?) : this() {
+
     }
 
     private val TAG = "TestService"
@@ -37,6 +45,7 @@ class TestService() : IntentService(TestService::class.java.simpleName) {
     override fun onCreate() {
         super.onCreate()
         Log.v(TAG, "onCreate: ")
+        var app = application as App
     }
 
     override fun onDestroy() {
