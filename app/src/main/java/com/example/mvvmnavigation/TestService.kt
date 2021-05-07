@@ -3,13 +3,17 @@ package com.example.mvvmnavigation
 import android.app.IntentService
 import android.content.Intent
 import android.util.Log
+import java.lang.Exception
 
 class TestService : IntentService {
+
+    var app: App? = null
 
     constructor() : super((TestService::class.java.simpleName)) {
         /**
          * IntentService экстендится от обычного Service. Service в свою очередь от ContextWrapper, он же от Context.
-         * Благодаря этому, из сервиса мы можем достучаться к Context-y, а соответственно к appContext, и через него комуницировать с              другими компонентами приложения, в данном случае с activity, которое его вызвало
+         * Благодаря этому, из сервиса мы можем достучаться к Context-y, а соответственно к appContext, и через него комуницировать с
+         * другими компонентами приложения, в данном случае с activity, которое его вызвало
          */
     }
 
@@ -45,7 +49,7 @@ class TestService : IntentService {
     override fun onCreate() {
         super.onCreate()
         Log.v(TAG, "onCreate: ")
-        var app = application as App
+        app = application as App
     }
 
     override fun onDestroy() {
@@ -61,8 +65,19 @@ class TestService : IntentService {
 
     fun downloadFile(url: String?) {
         Log.v(TAG, "downloading: ")
-        Thread.sleep(5000)
-        Log.v(TAG, "SUCCESS: ")
+        app!!.publishProgress(0)
+//        Thread.sleep(5000)
+        try {
+            val count = 5
+            for (i in 0..4) {
+                Thread.sleep(1000)
+                app!!.publishProgress(100 * (i + 1) / count)
+            }
+            app!!.publishCompleted()
+            Log.v(TAG, "SUCCESS: ")
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
     }
 
     companion object {
