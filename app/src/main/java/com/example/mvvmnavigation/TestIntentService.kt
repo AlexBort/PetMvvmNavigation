@@ -5,11 +5,11 @@ import android.content.Intent
 import android.util.Log
 import java.lang.Exception
 
-class TestService : IntentService {
+class TestIntentService : IntentService {
 
     var app: App? = null
 
-    constructor() : super((TestService::class.java.simpleName)) {
+    constructor() : super((TestIntentService::class.java.simpleName)) {
         /**
          * IntentService экстендится от обычного Service. Service в свою очередь от ContextWrapper, он же от Context.
          * Благодаря этому, из сервиса мы можем достучаться к Context-y, а соответственно к appContext, и через него комуницировать с

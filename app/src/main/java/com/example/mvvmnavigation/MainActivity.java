@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity implements TaskListener {
     findViewById(R.id.buttonClcl).setOnClickListener(new OnClickListener() {
       @Override
       public void onClick(View v) {
-        Intent intentService = new Intent(MainActivity.this, TestService.class);
+        Intent intentService = new Intent(MainActivity.this, TestIntentService.class);
         intentService.setAction(ACTION_CALCULATE);
 //        intentService.putExtra(EXTRA_URL, "google.com");
         startService(intentService);
@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity implements TaskListener {
     findViewById(R.id.buttonDwn).setOnClickListener(new OnClickListener() {
       @Override
       public void onClick(View v) {
-        Intent intentService = new Intent(MainActivity.this, TestService.class);
+        Intent intentService = new Intent(MainActivity.this, TestIntentService.class);
         intentService.setAction(ACTION_DOWNLOAD_FILE);
         intentService.putExtra(EXTRA_URL, "google.com");
         startService(intentService);
