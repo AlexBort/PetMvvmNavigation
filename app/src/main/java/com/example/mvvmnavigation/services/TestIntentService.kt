@@ -1,8 +1,10 @@
-package com.example.mvvmnavigation
+package com.example.mvvmnavigation.services
 
 import android.app.IntentService
 import android.content.Intent
 import android.util.Log
+import com.example.mvvmnavigation.App
+import com.example.mvvmnavigation.BuildConfig
 import java.lang.Exception
 
 class TestIntentService : IntentService {

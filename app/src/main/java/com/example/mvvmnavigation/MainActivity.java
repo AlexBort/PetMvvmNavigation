@@ -7,6 +7,8 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
+import com.example.mvvmnavigation.services.TestIntentService;
+import com.example.mvvmnavigation.services.TestService;
 
 public class MainActivity extends AppCompatActivity implements TaskListener {
 
@@ -31,7 +33,7 @@ public class MainActivity extends AppCompatActivity implements TaskListener {
     findViewById(R.id.buttonClcl).setOnClickListener(new OnClickListener() {
       @Override
       public void onClick(View v) {
-        Intent intentService = new Intent(MainActivity.this, TestIntentService.class);
+        Intent intentService = new Intent(MainActivity.this, TestService.class);
         intentService.setAction(ACTION_CALCULATE);
 //        intentService.putExtra(EXTRA_URL, "google.com");
         startService(intentService);
@@ -41,7 +43,7 @@ public class MainActivity extends AppCompatActivity implements TaskListener {
     findViewById(R.id.buttonDwn).setOnClickListener(new OnClickListener() {
       @Override
       public void onClick(View v) {
-        Intent intentService = new Intent(MainActivity.this, TestIntentService.class);
+        Intent intentService = new Intent(MainActivity.this, TestService.class);
         intentService.setAction(ACTION_DOWNLOAD_FILE);
         intentService.putExtra(EXTRA_URL, "google.com");
         startService(intentService);
