@@ -3,8 +3,12 @@ package com.example.mvvmnavigation.services
 import android.app.Service
 import android.content.Intent
 import android.os.Binder
+import android.os.Handler
 import android.os.IBinder
+import android.os.Looper
 import com.example.mvvmnavigation.MainActivity
+import com.example.mvvmnavigation.TaskListener
+import java.lang.Exception
 
 /**
  *  binding (связывание)
@@ -15,6 +19,7 @@ import com.example.mvvmnavigation.MainActivity
 class TestBindingService : Service() {
 
     var testBinder = TestBinder()
+    val handler: Handler = Handler(Looper.getMainLooper())
 
     override fun onBind(intent: Intent?): IBinder? {
         return testBinder
@@ -26,6 +31,25 @@ class TestBindingService : Service() {
     }
 
     fun getSettings(): String = "settings"
+
+    fun downloadFile(url: String, taskListener: TaskListener) {
+        Thread {
+            object : Runnable {
+                override fun run() {
+                    handler.post {
+                        taskListener.onProgressChanged(0)
+                        try {
+                            Thread.sleep(5000)
+                            handler.post { taskListener.onCompleted() }
+                        } catch (e: Exception) {
+
+                        }
+
+                    }
+                }
+            }
+        }.start() 
+    }
 
     inner class TestBinder : Binder() {
 
