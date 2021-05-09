@@ -19,10 +19,13 @@
         <category android:name="android.intent.category.LAUNCHER" />
       </intent-filter>
     </activity>
+
     <service android:name=".services.TestIntentService"
       android:exported="false"/>  <!--если не хотим ее делать доступной для других приложений, тогда проставляем exported=false-->
 
     <service android:name=".services.TestService"
+      android:exported="false"/>
+    <service android:name=".services.TestBindingService"
       android:exported="false"/>
   </application>
 

@@ -1,16 +1,22 @@
 package com.example.mvvmnavigation;
 
+import android.content.ComponentName;
 import android.content.Intent;
+import android.content.ServiceConnection;
+import android.os.Binder;
+import android.os.IBinder;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
+import com.example.mvvmnavigation.services.TestBindingService;
+import com.example.mvvmnavigation.services.TestBindingService.TestBinder;
 import com.example.mvvmnavigation.services.TestIntentService;
 import com.example.mvvmnavigation.services.TestService;
 
-public class MainActivity extends AppCompatActivity implements TaskListener {
+public class MainActivity extends AppCompatActivity /*implements TaskListener*/ {
 
   private static final String TAG = "MainActivity";
 
@@ -20,6 +26,22 @@ public class MainActivity extends AppCompatActivity implements TaskListener {
   private App app;
   private TextView textProgress;
   private ProgressBar progressBar;
+  private TestBindingService bindingService; // такая служба существует в одном экзмепляре
+
+  ServiceConnection connection = new ServiceConnection() {
+
+    // бвудет вызван при успешной инициализации привязки нашей службы
+    @Override
+    public void onServiceConnected(ComponentName name, IBinder binder) {
+      bindingService = ((TestBinder) binder).getService();
+    }
+
+    // этот метод может быть нужен только, если мы работаем с несколькими процеесами
+    @Override
+    public void onServiceDisconnected(ComponentName name) {
+      bindingService = null;
+    }
+  };
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -51,32 +73,45 @@ public class MainActivity extends AppCompatActivity implements TaskListener {
       }
     });
 
+    /* Есть 2 способа привязывания:
+    - с автоматическим созданием службы
+    - с ручным созданием службы
+     */
 
   }
 
   @Override
   protected void onStart() {
     super.onStart();
-    app.addListener(this);
+    Intent intent = new Intent(this, TestBindingService.class);
+    bindService(intent, connection, BIND_AUTO_CREATE);
   }
 
   @Override
   protected void onStop() {
     super.onStop();
-    app.removeListener(this);
+    unbindService(connection);
   }
 
-  @Override
-  public void onProgressChanged(int percents) {
-    progressBar.setVisibility(View.VISIBLE);
-    textProgress.setVisibility(View.VISIBLE);
-    textProgress.setText(getString(R.string.percents, percents));// форма, при которой проценьы будут меняться, хотя берем из стрингов значение
-//    app.
-  }
+//  @Override
+//  public void onProgressChanged(int percents) {
+//    progressBar.setVisibility(View.VISIBLE);
+//    textProgress.setVisibility(View.VISIBLE);
+//    textProgress.setText(getString(R.string.percents,
+//        percents));// форма, при которой проценьы будут меняться, хотя берем из стрингов значение
+////    app.
+//  }
+//
+//  @Override
+//  public void onCompleted() {
+//    progressBar.setVisibility(View.GONE);
+//    textProgress.setVisibility(View.GONE);
+//  }
+//
+//  class TestBinder extends Binder {
+//    MainActivity getService() {
+//      return MainActivity.this;
+//    }
+//  }
 
-  @Override
-  public void onCompleted() {
-    progressBar.setVisibility(View.GONE);
-    textProgress.setVisibility(View.GONE);
-  }
 }
