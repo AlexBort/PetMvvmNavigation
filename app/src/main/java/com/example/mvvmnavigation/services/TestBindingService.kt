@@ -31,6 +31,14 @@ class TestBindingService : Service() {
         return super.onStartCommand(intent, flags, startId)
     }
 
+    override fun onUnbind(intent: Intent?): Boolean {
+        return super.onUnbind(intent)
+    }
+
+    override fun onRebind(intent: Intent?) {
+        super.onRebind(intent)
+    }
+
     fun getSettings(): String = "settings"
 
     fun downloadFile(url: String, taskListener: TaskListener) {
