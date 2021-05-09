@@ -95,6 +95,8 @@ public class MainActivity extends AppCompatActivity /*implements TaskListener*/ 
     - с автоматическим созданием службы
     - с ручным созданием службы
      */
+    Intent intent = new Intent(MainActivity.this, TestBindingService.class);
+    startService(intent);
 
   }
 
@@ -111,7 +113,16 @@ public class MainActivity extends AppCompatActivity /*implements TaskListener*/ 
     unbindService(connection);
   }
 
-//  @Override
+  @Override
+  protected void onDestroy() {
+    super.onDestroy();
+    if (isDestroyed()) {
+      Intent intent = new Intent(MainActivity.this, TestBindingService.class);
+      stopService(intent);
+    }
+  }
+
+  //  @Override
 //  public void onProgressChanged(int percents) {
 //    progressBar.setVisibility(View.VISIBLE);
 //    textProgress.setVisibility(View.VISIBLE);
