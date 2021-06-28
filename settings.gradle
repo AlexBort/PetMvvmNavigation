@@ -1,3 +1,5 @@
 include ':app'
 rootProject.name = "PetMvvmNavigation"
 include ':domain'
+include ':data'
+include ':interactor'
