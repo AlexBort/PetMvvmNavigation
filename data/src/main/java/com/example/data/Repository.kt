@@ -1,4 +1,4 @@
 package com.example.data
 
-class MyClass {
+class Repository {
 }
