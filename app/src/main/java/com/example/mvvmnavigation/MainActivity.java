@@ -10,6 +10,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.Toast;
+
 import java.util.concurrent.TimeUnit;
 
 public class MainActivity extends AppCompatActivity {
@@ -25,6 +27,8 @@ public class MainActivity extends AppCompatActivity {
     setContentView(R.layout.activity_main);
     final TextView text = findViewById(R.id.text);
     Button button = findViewById(R.id.launch_thread);
+
+    Toast.makeText(MainActivity.this,"",Toast.LENGTH_SHORT);
 
     handler = new Handler(Looper.myLooper()) {
       @Override
@@ -65,5 +69,10 @@ public class MainActivity extends AppCompatActivity {
         });
       }
     });
+
+
+
+
+
   }
 }
