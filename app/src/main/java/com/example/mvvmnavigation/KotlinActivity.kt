@@ -3,11 +3,14 @@ package com.example.mvvmnavigation
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
+import kotlinx.coroutines.withContext
 
 class KotlinActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_kotlin)
+
+//        withContext()
 
         Thread {
             for (i in 0..4) {

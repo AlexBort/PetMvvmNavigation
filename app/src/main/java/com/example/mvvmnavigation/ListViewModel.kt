@@ -1,57 +1,49 @@
-package com.example.mvvmnavigation;
+package com.example.mvvmnavigation
 
-import android.util.Log;
-import androidx.lifecycle.Lifecycle.Event;
-import androidx.lifecycle.LifecycleEventObserver;
-import androidx.lifecycle.LifecycleObserver;
-import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.OnLifecycleEvent;
-import androidx.lifecycle.ViewModel;
-import com.example.mvvmnavigation.api.ApiConnector;
-import com.example.mvvmnavigation.api.ManResponse;
-import com.example.mvvmnavigation.api.ResponseCallback;
-import com.example.mvvmnavigation.models.User;
-import java.util.List;
-import java.util.logging.Logger;
-import org.jetbrains.annotations.NotNull;
 
-public class ListViewModel extends ViewModel implements LifecycleObserver {
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.LifecycleObserver
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.OnLifecycleEvent
+import androidx.lifecycle.Lifecycle
+import com.example.mvvmnavigation.api.ApiConnector
+import com.example.mvvmnavigation.api.ManResponse
+import com.example.mvvmnavigation.api.ResponseCallback
+import com.example.mvvmnavigation.models.User
 
-  private final MutableLiveData<List<String>> data = new MutableLiveData<>();
-  private final MutableLiveData<String> dataString = new MutableLiveData<>();
-  private final MutableLiveData<List<User>> users = new MutableLiveData<>();
+class ListViewModel : ViewModel(), LifecycleObserver {
 
-  public MutableLiveData<String> getDataString() {
-    return dataString;
-  }
+    val data = MutableLiveData<List<String>>()
+    val dataString = MutableLiveData<String>()
+    val users = MutableLiveData<List<User>>()
 
-  public MutableLiveData<List<User>> getUsersList() {
-    return users;
-  }
+    @OnLifecycleEvent(Lifecycle.Event.ON_START)
+    fun onViewStarted(){
+        ApiConnector().sendRequestInfoList(object : ResponseCallback<ManResponse> {
 
-  public LiveData<List<String>> getData() {
-    return data;
-  }
+            override fun onSuccess(response: ManResponse) {
+                users.value = response.results
+            }
 
-  @OnLifecycleEvent(Event.ON_START)
-  public void onViewStarted() {
-    new ApiConnector().sendRequestInfoList(new ResponseCallback<ManResponse>() {
-      @Override
-      public void onSuccess(ManResponse response) {
-        users.setValue(response.getResults());
-      }
+            override fun onError(throwable: Throwable) {
+                TODO("Not yet implemented")
+            }
 
-      @Override
-      public void onError(@NotNull Throwable throwable) {
+        })
+    }
 
-      }
-    });
-//    List<String> list = App.repository.getTestList();
+
+//    @OnLifecycleEvent(Lifecycle.Event.ON_START)
+//    fun onViewStarted() {
+//        ApiConnector().sendRequestInfoList({
+//            ->
+//        })
+
+
+        //    List<String> list = App.repository.getTestList();
 //    data.setValue(list);
 //    Log.d("ListViewModel", "onViewStarted");
 //
 //    dataString.setValue("TEST VALUE");
-  }
-
+    }
 }
