@@ -46,4 +46,3 @@ class ListViewModel : ViewModel(), LifecycleObserver {
 //
 //    dataString.setValue("TEST VALUE");
     }
-}
