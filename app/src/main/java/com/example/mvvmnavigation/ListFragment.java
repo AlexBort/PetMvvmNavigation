@@ -17,14 +17,14 @@ import java.util.List;
 
 public class ListFragment extends Fragment {
 
-  ListViewModel viewModel;
+  private KtListViewModel viewModel;
 
   @Override
   public void onCreate(@Nullable Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    viewModel = new ViewModelProvider(this).get(ListViewModel.class);
+    viewModel = new ViewModelProvider(this).get(KtListViewModel.class);
     getLifecycle().addObserver(viewModel);
-    viewModel.getData().observe(this,
+    viewModel.getDataListString().observe(this,
         new Observer<List<String>>() {
       @Override
       public void onChanged(List<String> strings) {
@@ -39,7 +39,7 @@ public class ListFragment extends Fragment {
     final FragmentListBinding view = FragmentListBinding.inflate(inflater, container, false);
     view.setViewmodel(viewModel);
     final ListView listView = view.listView;
-    viewModel.getUsersList().observe(this, new Observer<List<User>>() {
+    viewModel.getDataListUser().observe(this, new Observer<List<User>>() {
       @Override
       public void onChanged(List<User> list) {
         listView.setAdapter(new UserListAdapter(getContext(), list));

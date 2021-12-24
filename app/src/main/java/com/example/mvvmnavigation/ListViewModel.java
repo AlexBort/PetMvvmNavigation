@@ -47,11 +47,6 @@ public class ListViewModel extends ViewModel implements LifecycleObserver {
 
       }
     });
-//    List<String> list = App.repository.getTestList();
-//    data.setValue(list);
-//    Log.d("ListViewModel", "onViewStarted");
-//
-//    dataString.setValue("TEST VALUE");
   }
 
 }
