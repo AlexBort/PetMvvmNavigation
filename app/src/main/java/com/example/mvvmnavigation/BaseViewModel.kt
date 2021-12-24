@@ -1,6 +1,7 @@
 package com.example.mvvmnavigation
 
 import androidx.lifecycle.*
+import com.example.mvvmnavigation.handle_results.Result
 
 /*
 typealias - це будуть як альтернативні назви для типів LiveData,

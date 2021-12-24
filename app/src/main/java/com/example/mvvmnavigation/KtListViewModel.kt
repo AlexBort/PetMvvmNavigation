@@ -11,9 +11,9 @@ import com.example.mvvmnavigation.models.User
 
 class KtListViewModel : BaseViewModel() {
 
-    private val mtDataListString: MutableLiveResult<List<String>> = MutableLiveData()
-    private val mtDataString: MutableLiveResult<String> = MutableLiveData()
-    private val mtDataUser: MutableLiveResult<List<User>> = MutableLiveData()
+    private val mtDataListString: MutableLiveResult<List<String>> = MutableLiveResult()
+    private val mtDataString: MutableLiveResult<String> = MutableLiveResult()
+    private val mtDataUser: MutableLiveResult<List<User>> = MutableLiveResult()
 
     val dataListString: LiveResult<List<String>> = mtDataListString
     val dataString: LiveResult<String> = mtDataString
@@ -35,7 +35,7 @@ class KtListViewModel : BaseViewModel() {
     fun onViewStarted() {
         ApiConnector().sendRequestInfoList(object : ResponseCallback<ManResponse>{
             override fun onSuccess(response: ManResponse) {
-                mtDataUser.value = response.results
+//                mtDataUser.value = response.results
             }
 
             override fun onError(throwable: Throwable) {

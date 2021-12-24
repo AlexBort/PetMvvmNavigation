@@ -1,17 +1,20 @@
 package com.example.mvvmnavigation.handle_results
 
+import android.app.Activity
+import androidx.fragment.app.Fragment
+import com.example.mvvmnavigation.MainActivity
 import java.lang.Exception
 import java.lang.IllegalStateException
 
-typealias Mapper<Input,Output> = (Input) -> Output
+typealias Mapper<Input, Output> = (Input) -> Output
 
 // sealed classes- классы, в которых наследники будут известны на этапе компиляции проекта
 sealed class Result<T> {
-    fun <R> map(mapper: Mapper<T, R>? = null): Result<R> = when(this){
-         is ProgressResult -> ProgressResult()
+    fun <R> map(mapper: Mapper<T, R>? = null): Result<R> = when (this) {
+        is ProgressResult -> ProgressResult()
         is ErrorResult -> ErrorResult(this.error)
         is SuccessResult -> {
-            if (mapper==null){
+            if (mapper == null) {
                 throw IllegalStateException("Mapper should not be null for success result")
             }
             SuccessResult(mapper(this.data))
@@ -32,4 +35,8 @@ fun <T> Result<T>?.takeSuccess(): T? {
     return if (this is SuccessResult) {
         this.data
     } else null
+}
+
+fun Fragment.getMainActivity(): MainActivity {
+    return this.activity as MainActivity
 }
