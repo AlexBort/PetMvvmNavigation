@@ -20,7 +20,7 @@ import com.example.mvvmnavigation.handle_results.SuccessResult
 import com.example.mvvmnavigation.handle_results.getMainActivity
 import com.example.mvvmnavigation.models.User
 
-class ListFragment : Fragment() {
+class ListFragment : BaseFragment() {
     private var viewModel: KtListViewModel? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -43,23 +43,21 @@ class ListFragment : Fragment() {
     ): View {
         val view = FragmentListBinding.inflate(inflater, container, false)
 
-        viewModel?.dataListString?.observe(this) { result ->
-            when (result) {
-                is ProgressResult -> {
-                    getMainActivity().partResultLayout.progressBar.visibility = VISIBLE
-                    getMainActivity().partResultLayout.errorContainer.visibility = GONE
-                }
-                is ErrorResult -> {
-                    getMainActivity().partResultLayout.progressBar.visibility = GONE
-                    getMainActivity().partResultLayout.errorContainer.visibility = VISIBLE
 
-                }
-                is SuccessResult -> {
-                    getMainActivity().partResultLayout.progressBar.visibility = GONE
-                    getMainActivity().partResultLayout.errorContainer.visibility = GONE
-                    Log.d("ListFragment", result.data.toString())
-                }
-            }
+        viewModel?.dataListString?.observe(this) { result ->
+            renderResult(
+                root = getMainActivity().root,
+                result = result,
+                onSuccess = {
+                    Log.d("ListFragment", it.toString())
+                },
+                onError = {
+                    getMainActivity().partResultLayout.errorContainer.visibility = VISIBLE
+                    Log.e("ListFragment", it.message ?: "")
+                },
+                onProgress = {
+                    getMainActivity().partResultLayout.progressBar.visibility = VISIBLE
+                })
         }
 
 
@@ -69,6 +67,7 @@ class ListFragment : Fragment() {
         viewModel!!.dataListUser.observe(
             this,
 //            Observer<List<User?>?> { list -> listView.adapter = UserListAdapter(context, list) })
-            return view.root)
+            return view.root
+        )
     }
 }
