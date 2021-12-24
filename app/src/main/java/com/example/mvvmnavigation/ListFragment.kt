@@ -42,24 +42,11 @@ class ListFragment : BaseFragment() {
         savedInstanceState: Bundle?
     ): View {
         val view = FragmentListBinding.inflate(inflater, container, false)
-
-
         viewModel?.dataListString?.observe(this) { result ->
-            renderResult(
-                root = getMainActivity().root,
-                result = result,
-                onSuccess = {
-                    Log.d("ListFragment", it.toString())
-                },
-                onError = {
-                    getMainActivity().partResultLayout.errorContainer.visibility = VISIBLE
-                    Log.e("ListFragment", it.message ?: "")
-                },
-                onProgress = {
-                    getMainActivity().partResultLayout.progressBar.visibility = VISIBLE
-                })
+            renderSimpleResult(getMainActivity().root, result, onSuccess = {
+                Log.d("ListFragment", it.toString())
+            })
         }
-
 
         view.viewmodel = viewModel
         val listView = view.listView

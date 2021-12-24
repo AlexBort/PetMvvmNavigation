@@ -12,12 +12,12 @@ import com.example.mvvmnavigation.handle_results.SuccessResult
 
 open class BaseFragment : Fragment() {
     open fun <T> renderResult(
-        root: View?, result: Result<T>,
+        root: ViewGroup?, result: Result<T>,
         onProgress: () -> Unit,
         onError: (Exception) -> Unit,
         onSuccess: (T) -> Unit
     ) {
-        (root as ViewGroup).children.forEach { it.visibility = GONE }
+        root?.children?.forEach { it.visibility = GONE }
         when(result){
             is SuccessResult -> onSuccess(result.data)
             is ErrorResult -> onError(result.error)
