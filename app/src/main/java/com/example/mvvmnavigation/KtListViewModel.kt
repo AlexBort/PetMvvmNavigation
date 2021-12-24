@@ -11,13 +11,13 @@ import com.example.mvvmnavigation.models.User
 
 class KtListViewModel : BaseViewModel() {
 
-    private val mtDataListString: MutableLiveData<List<String>> = MutableLiveData()
-    private val mtDataString: MutableLiveData<String> = MutableLiveData()
-    private val mtDataUser: MutableLiveData<List<User>> = MutableLiveData()
+    private val mtDataListString: MutableLiveResult<List<String>> = MutableLiveData()
+    private val mtDataString: MutableLiveResult<String> = MutableLiveData()
+    private val mtDataUser: MutableLiveResult<List<User>> = MutableLiveData()
 
-    val dataListString: LiveData<List<String>> = mtDataListString
-    val dataString: LiveData<String> = mtDataString
-    val dataListUser: LiveData<List<User>> = mtDataUser
+    val dataListString: LiveResult<List<String>> = mtDataListString
+    val dataString: LiveResult<String> = mtDataString
+    val dataListUser: LiveResult<List<User>> = mtDataUser
 
 //    fun getDataString(): MutableLiveData<String?>? {
 //        return mtDataString
