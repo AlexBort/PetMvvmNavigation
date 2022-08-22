@@ -8,12 +8,15 @@ import dagger.Provides
  * ця анотація показує, що цей інтерфейс помічений, як компонент.
  * І саме з нього можна буде отримувати залежності.
  */
-@Component
+
 /**
  * але в цю анотацію потрібно якось ці параметри передати.
- * В анотцію @Component можна передати модулі
+ * В анотацію @Component можна передати модулі
  */
+@Component(modules = [AppModule::class])
 interface AppComponent {
+    fun computer(): Computer
+    val computerProperty: Computer
 }
 
 @Module
