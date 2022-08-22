@@ -1,6 +1,8 @@
 package com.example.mvvmnavigation.for_dagger
 
 import dagger.Component
+import dagger.Module
+import dagger.Provides
 
 /**
  * ця анотація показує, що цей інтерфейс помічений, як компонент.
@@ -12,4 +14,17 @@ import dagger.Component
  * В анотцію @Component можна передати модулі
  */
 interface AppComponent {
+}
+
+@Module
+object AppModule {
+
+    @Provides
+    fun provideComputer(): Computer {
+        return Computer(
+            processor = Processor(),
+            motherboard = Motherboard(),
+            ram = RAM()
+        )
+    }
 }
