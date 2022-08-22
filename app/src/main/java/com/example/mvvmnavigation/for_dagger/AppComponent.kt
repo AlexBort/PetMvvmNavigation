@@ -20,11 +20,13 @@ interface AppComponent {
 object AppModule {
 
     @Provides
-    fun provideComputer(): Computer {
+    fun provideComputer(processor: Processor,
+                        ram: RAM,
+                        motherboard: Motherboard): Computer {
         return Computer(
-            processor = Processor(),
-            motherboard = Motherboard(),
-            ram = RAM()
+            processor = processor,
+            motherboard = motherboard,
+            ram = ram
         )
         /**
          * ми це зробили, але проблема у тому, що Computer знає,
