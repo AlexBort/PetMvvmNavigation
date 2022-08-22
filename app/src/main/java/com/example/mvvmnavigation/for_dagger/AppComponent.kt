@@ -34,4 +34,13 @@ object AppModule {
          * Краще, щоб ці залежності приходили ззовні
          */
     }
+
+    @Provides
+    fun provideRAM() = RAM()
+
+    @Provides
+    fun provideProcessor() = Processor()
+
+    @Provides
+    fun provideMotherBoard() = Motherboard()
 }
