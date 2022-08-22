@@ -12,4 +12,5 @@
 
 STEPS:
 1-  create Computer file for which dagger will be implemented 
-2- 
+2- make graph of dependencies - it's implemented as interface AppComponent
+3- 
