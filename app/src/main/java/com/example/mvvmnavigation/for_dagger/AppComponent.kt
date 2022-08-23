@@ -4,6 +4,23 @@ import dagger.Component
 import dagger.Module
 import dagger.Provides
 
+fun main() {
+    /**
+     * init of whole graph
+     */
+    val appComponent:AppComponent = DaggerAppComponent.create()
+    /**
+     * we can call create() ot builder() function.
+     * If we need to pass some params (dependencies) into it
+     * we'll call builder() if creation without params we'll call create()
+     */
+        // DaggerAppComponent.builder()
+//        DaggerAppComponent.create()
+
+    println("print property of Computer: ${appComponent.computerProperty}")
+    println("print fun that returns Computer: ${appComponent.computer()}")
+}
+
 /**
  * ця анотація показує, що цей інтерфейс помічений, як компонент.
  * І саме з нього можна буде отримувати залежності.
