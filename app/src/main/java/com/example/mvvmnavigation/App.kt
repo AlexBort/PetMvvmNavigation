@@ -1,14 +1,29 @@
-package com.example.mvvmnavigation;
+package com.example.mvvmnavigation
 
-import android.app.Application;
+import android.app.Application
+import android.content.Context
+import com.example.mvvmnavigation.for_dagger.AppComponent
+import com.example.mvvmnavigation.for_dagger.DaggerAppComponent
 
-public class App extends Application {
+class App : Application() {
 
-  public static Repository repository = new Repository();
+    lateinit var appComponent: AppComponent
 
-  @Override
-  public void onCreate() {
-    super.onCreate();
-//    Repository repository = new Repository();
-  }
+    override fun onCreate() {
+        super.onCreate()
+        appComponent = DaggerAppComponent.create()
+    }
+
+    companion object {
+        var repository = Repository()
+    }
 }
+/**
+ * тепер реалізовуємо отримання appComponent по всьому додатку
+ *
+ */
+val Context.appComponent: AppComponent
+    get() = when (this) {
+        is App -> appComponent
+        else -> this.applicationContext.appComponent
+    }
