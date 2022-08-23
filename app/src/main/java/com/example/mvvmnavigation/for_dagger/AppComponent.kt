@@ -1,5 +1,6 @@
 package com.example.mvvmnavigation.for_dagger
 
+import com.example.mvvmnavigation.MainActivity
 import dagger.Component
 import dagger.Module
 import dagger.Provides
@@ -32,6 +33,7 @@ fun main() {
  */
 @Component(modules = [AppModule::class])
 interface AppComponent {
+    fun passParamsInMainActivity(activity: MainActivity) // тобто ми будемо доставляти необхідні залежності цим методом в MainActivity
     fun computer(): Computer
     val computerProperty: Computer
 }

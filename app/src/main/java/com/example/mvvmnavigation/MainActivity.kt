@@ -6,9 +6,14 @@ import android.view.ViewGroup
 import com.example.mvvmnavigation.databinding.ActivityMainBinding
 import com.example.mvvmnavigation.databinding.PartResultBinding
 import com.example.mvvmnavigation.for_dagger.Computer
+import javax.inject.Inject
 
 class MainActivity : AppCompatActivity() {
+
     var mainBinding: ActivityMainBinding? = null
+
+    @Inject
+    lateinit var computer: Computer
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -16,7 +21,12 @@ class MainActivity : AppCompatActivity() {
             layoutInflater
         )
         setContentView(mainBinding!!.root)
-        val computer: Computer = appComponent.computer()
+
+//        val computer: Computer = appComponent.computer()
+        /**
+         * instead of init (above commented code) we will do it another way
+         */
+        appComponent.passParamsInMainActivity(this)
     }
 
     val root: ViewGroup?
