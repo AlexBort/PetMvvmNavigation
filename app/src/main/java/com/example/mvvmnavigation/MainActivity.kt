@@ -1,31 +1,25 @@
-package com.example.mvvmnavigation;
+package com.example.mvvmnavigation
 
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.ViewGroup;
+import androidx.appcompat.app.AppCompatActivity
+import android.os.Bundle
+import android.view.ViewGroup
+import com.example.mvvmnavigation.databinding.ActivityMainBinding
+import com.example.mvvmnavigation.databinding.PartResultBinding
 
-import com.example.mvvmnavigation.databinding.ActivityMainBinding;
-import com.example.mvvmnavigation.databinding.PartResultBinding;
+class MainActivity : AppCompatActivity() {
+    var mainBinding: ActivityMainBinding? = null
 
-public class MainActivity extends AppCompatActivity {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        mainBinding = ActivityMainBinding.inflate(
+            layoutInflater
+        )
+        setContentView(mainBinding!!.root)
 
-  ActivityMainBinding mainBinding;
+    }
 
-  @Override
-  protected void onCreate(Bundle savedInstanceState) {
-    super.onCreate(savedInstanceState);
-    mainBinding = ActivityMainBinding.inflate(getLayoutInflater());
-    setContentView(mainBinding.getRoot());
-  }
-
-  public @Nullable ViewGroup getRoot(){
-    return mainBinding.getRoot();
-  }
-
-  public PartResultBinding getPartResultLayout(){
-    return PartResultBinding.bind(mainBinding.getRoot());
-  }
-
+    val root: ViewGroup?
+        get() = mainBinding!!.root
+    val partResultLayout: PartResultBinding
+        get() = PartResultBinding.bind(mainBinding!!.root)
 }
