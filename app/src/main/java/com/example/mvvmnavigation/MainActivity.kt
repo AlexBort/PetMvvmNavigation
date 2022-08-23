@@ -21,7 +21,6 @@ class MainActivity : AppCompatActivity() {
             layoutInflater
         )
         setContentView(mainBinding!!.root)
-
 //        val computer: Computer = appComponent.computer()
         /**
          * instead of init (above commented code) we will do it another way
