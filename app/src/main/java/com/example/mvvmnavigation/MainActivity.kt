@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.ViewGroup
 import com.example.mvvmnavigation.databinding.ActivityMainBinding
 import com.example.mvvmnavigation.databinding.PartResultBinding
+import com.example.mvvmnavigation.for_dagger.Computer
 
 class MainActivity : AppCompatActivity() {
     var mainBinding: ActivityMainBinding? = null
@@ -15,7 +16,7 @@ class MainActivity : AppCompatActivity() {
             layoutInflater
         )
         setContentView(mainBinding!!.root)
-
+        val computer: Computer = appComponent.computer()
     }
 
     val root: ViewGroup?
