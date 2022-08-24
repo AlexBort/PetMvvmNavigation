@@ -6,10 +6,10 @@ import dagger.Provides
 import retrofit2.Retrofit
 import retrofit2.create
 
-@Component(modules = [AppModule::class, NetworkModule::class])
+@Component(modules = [AppModule::class])
 interface AppComponent
 
-@Module
+@Module(includes = [NetworkModule::class])
 class AppModule {
 
     @Provides
