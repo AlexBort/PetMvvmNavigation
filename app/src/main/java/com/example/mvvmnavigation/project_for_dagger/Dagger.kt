@@ -21,15 +21,26 @@ class AppModule {
     }
 
     @Provides
+    fun provideAnalytics(): Analytics {
+        return Analytics()
+    }
+}
+
+@Module
+class NetworkModule {
+    @Provides
     fun provideNewsService(): NewsService {
         val retrofit = Retrofit.Builder()
             .baseUrl("https://androidbrodcast.dev")
             .build()
         return retrofit.create()
     }
-
-    @Provides
-    fun provideAnalytics(): Analytics {
-        return Analytics()
-    }
 }
+
+//@Module
+//class AnalyticsModule{
+//    @Provides
+//    fun provideAnalytics(): Analytics {
+//        return Analytics()
+//    }
+//}
