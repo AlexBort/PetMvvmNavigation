@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import com.example.mvvmnavigation.databinding.ActivityMainBinding
 import com.example.mvvmnavigation.databinding.PartResultBinding
 import com.example.mvvmnavigation.for_dagger.Computer
+import com.example.mvvmnavigation.project_for_dagger.Analytics
 import javax.inject.Inject
 
 class MainActivity : AppCompatActivity() {
@@ -14,18 +15,26 @@ class MainActivity : AppCompatActivity() {
 
     @Inject
     lateinit var computer: Computer
+    @Inject
+    lateinit var analytics: Analytics
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        /**
+         * instead of init (above commented code) we will do it another way
+         */
+        appComponent.passParamsInMainActivity(this)
+        trackOnStart()
         mainBinding = ActivityMainBinding.inflate(
             layoutInflater
         )
         setContentView(mainBinding!!.root)
 //        val computer: Computer = appComponent.computer()
-        /**
-         * instead of init (above commented code) we will do it another way
-         */
-        appComponent.passParamsInMainActivity(this)
+
+    }
+
+    fun trackOnStart(){
+        analytics.trackScreenShow()
     }
 
     val root: ViewGroup?

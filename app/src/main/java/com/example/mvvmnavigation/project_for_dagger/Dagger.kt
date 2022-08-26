@@ -7,6 +7,7 @@ import dagger.Provides
 import retrofit2.Retrofit
 import retrofit2.create
 
+
 @Component(modules = [AppModule::class])
 interface AppComponent
 
