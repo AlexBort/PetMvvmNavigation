@@ -1,5 +1,6 @@
 package com.example.mvvmnavigation.project_for_dagger
 
+import dagger.Binds
 import dagger.Component
 import dagger.Module
 import dagger.Provides
@@ -10,12 +11,10 @@ import retrofit2.create
 interface AppComponent
 
 @Module(includes = [NetworkModule::class])
-class AppModule {
+abstract class AppModule {
 
-    @Provides
-    fun provideNewsRepository(repImpl: NewsRepositoryImpl): NewsRepository {
-        return repImpl
-    }
+    @Binds
+    abstract fun bindsNewsRepositoryImpl_to_NewsRepository(repImpl: NewsRepositoryImpl): NewsRepository
 
     @Provides
     fun provideNewsRepositoryImpl(
