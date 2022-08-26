@@ -6,7 +6,7 @@ import dagger.Module
 import dagger.Provides
 import retrofit2.Retrofit
 import retrofit2.create
-import javax.inject.Named
+import javax.inject.Qualifier
 
 
 @Component(modules = [AppModule::class])
@@ -25,11 +25,17 @@ interface AppBindModule {
     fun bindsNewsRepositoryImpl_to_NewsRepository(repImpl: NewsRepositoryImpl): NewsRepository
 }
 
+@Qualifier
+annotation class Prod
+
+@Qualifier
+annotation class Stage
+
 @Module
 class NetworkModule {
 
     @Provides
-    @Named("prod")
+    @Prod
     fun provideProdNewsService(): NewsService {
         val retrofit = Retrofit.Builder()
             .baseUrl("https://androidbrodcast.dev")
@@ -38,7 +44,7 @@ class NetworkModule {
     }
 
     @Provides
-    @Named("stage")
+    @Stage
     fun provideStageNewsService(): NewsService {
         val retrofit = Retrofit.Builder()
             .baseUrl("https://stage.androidbrodcast.dev")
