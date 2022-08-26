@@ -13,6 +13,11 @@ interface AppComponent
 class AppModule {
 
     @Provides
+    fun provideNewsRepository(repImpl: NewsRepositoryImpl): NewsRepository {
+        return repImpl
+    }
+
+    @Provides
     fun provideNewsRepositoryImpl(
         newsService: NewsService,
         analytics: Analytics,
