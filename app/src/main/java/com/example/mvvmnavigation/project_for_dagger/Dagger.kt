@@ -26,15 +26,19 @@ interface AppBindModule {
 
 @Module
 class NetworkModule {
-    /**
-     * але в retrofit не вдасться проставити @Inject анотацію
-     * по причині того, що це зовнішня ліба,
-     * і в її класи вже не вийде писати свій код (вставляти свої анотації)
-     */
+
     @Provides
-    fun provideNewsService(): NewsService {
+    fun provideProdNewsService(): NewsService {
         val retrofit = Retrofit.Builder()
             .baseUrl("https://androidbrodcast.dev")
+            .build()
+        return retrofit.create()
+    }
+
+    @Provides
+    fun provideStageNewsService(): NewsService {
+        val retrofit = Retrofit.Builder()
+            .baseUrl("https://stage.androidbrodcast.dev")
             .build()
         return retrofit.create()
     }
