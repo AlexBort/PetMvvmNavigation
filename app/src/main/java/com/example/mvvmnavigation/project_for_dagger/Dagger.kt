@@ -10,11 +10,8 @@ import retrofit2.create
 @Component(modules = [AppModule::class])
 interface AppComponent
 
-@Module(includes = [NetworkModule::class])
-abstract class AppModule {
-
-    @Binds
-    abstract fun bindsNewsRepositoryImpl_to_NewsRepository(repImpl: NewsRepositoryImpl): NewsRepository
+@Module(includes = [NetworkModule::class, AppBindModule::class])
+ class AppModule {
 
     @Provides
     fun provideNewsRepositoryImpl(
@@ -28,6 +25,12 @@ abstract class AppModule {
     fun provideAnalytics(): Analytics {
         return Analytics()
     }
+}
+
+@Module
+abstract class AppBindModule {
+    @Binds
+    abstract fun bindsNewsRepositoryImpl_to_NewsRepository(repImpl: NewsRepositoryImpl): NewsRepository
 }
 
 @Module
