@@ -1,6 +1,7 @@
 package com.example.mvvmnavigation.project_for_dagger
 
 import javax.inject.Inject
+import javax.inject.Named
 
 interface NewsRepository {
 
@@ -8,6 +9,7 @@ interface NewsRepository {
 }
 
 class NewsRepositoryImpl @Inject constructor(
+    @Named("prod")
     private val newsService: NewsService,
     private val analytics: Analytics,
 ) : NewsRepository {
