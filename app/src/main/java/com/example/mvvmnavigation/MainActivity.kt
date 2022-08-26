@@ -15,8 +15,6 @@ class MainActivity : AppCompatActivity() {
 
     @Inject
     lateinit var computer: Computer
-    @Inject
-    lateinit var analytics: Analytics
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,7 +22,6 @@ class MainActivity : AppCompatActivity() {
          * instead of init (above commented code) we will do it another way
          */
         appComponent.passParamsInMainActivity(this)
-        trackOnStart()
         mainBinding = ActivityMainBinding.inflate(
             layoutInflater
         )
@@ -33,7 +30,8 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    fun trackOnStart(){
+    @Inject
+    fun trackOnStart(analytics: Analytics){
         analytics.trackScreenShow()
     }
 
