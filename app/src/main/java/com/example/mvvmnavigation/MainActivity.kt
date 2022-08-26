@@ -24,7 +24,6 @@ class MainActivity : AppCompatActivity() {
          * instead of init (above commented code) we will do it another way
          */
         appComponent.passParamsInMainActivity(this)
-        trackOnStart()
         mainBinding = ActivityMainBinding.inflate(
             layoutInflater
         )
@@ -33,6 +32,7 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+    @Inject
     fun trackOnStart(){
         analytics.trackScreenShow()
     }
