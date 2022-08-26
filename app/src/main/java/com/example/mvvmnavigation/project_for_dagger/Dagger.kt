@@ -11,21 +11,11 @@ import retrofit2.create
 interface AppComponent
 
 @Module(includes = [NetworkModule::class, AppBindModule::class])
- class AppModule {
-
-    @Provides
-    fun provideNewsRepositoryImpl(
-        newsService: NewsService,
-        analytics: Analytics,
-    ): NewsRepositoryImpl {
-        return NewsRepositoryImpl(newsService, analytics)
-    }
-
-    @Provides
-    fun provideAnalytics(): Analytics {
-        return Analytics()
-    }
-}
+ class AppModule
+/**
+ * ми видалили @Provides, і замість цього реалізовуємо @Inject в конструктарах тих класів,
+ * які отримували раніше за допомогою @Provides
+ */
 
 @Module
 interface AppBindModule {
@@ -35,6 +25,11 @@ interface AppBindModule {
 
 @Module
 class NetworkModule {
+    /**
+     * але в retrofit не вдасться проставити @Inject анотацію
+     * по причині того, що це зовнішня ліба,
+     * і в її класи вже не вийде писати свій код (вставляти свої анотації)
+     */
     @Provides
     fun provideNewsService(): NewsService {
         val retrofit = Retrofit.Builder()

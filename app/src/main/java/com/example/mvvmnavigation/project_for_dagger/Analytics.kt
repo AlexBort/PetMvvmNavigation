@@ -1,6 +1,8 @@
 package com.example.mvvmnavigation.project_for_dagger
 
-class Analytics {
+import javax.inject.Inject
+
+class Analytics @Inject constructor() {
 
     fun trackNewsRequest(newsId: String) {
         // Do nothing
