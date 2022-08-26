@@ -28,9 +28,9 @@ interface AppComponent
 }
 
 @Module
-abstract class AppBindModule {
+interface AppBindModule {
     @Binds
-    abstract fun bindsNewsRepositoryImpl_to_NewsRepository(repImpl: NewsRepositoryImpl): NewsRepository
+    fun bindsNewsRepositoryImpl_to_NewsRepository(repImpl: NewsRepositoryImpl): NewsRepository
 }
 
 @Module
