@@ -1,4 +1,4 @@
-package com.example.mvvmnavigation.project_for_dagger
+package com.example.mvvmnavigation.mob_project_for_dagger
 
 import retrofit2.http.GET
 import retrofit2.http.Path

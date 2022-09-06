@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import com.example.mvvmnavigation.databinding.ActivityMainBinding
 import com.example.mvvmnavigation.databinding.PartResultBinding
 import com.example.mvvmnavigation.for_dagger.Computer
-import com.example.mvvmnavigation.project_for_dagger.Analytics
+import com.example.mvvmnavigation.mob_project_for_dagger.Analytics
 import javax.inject.Inject
 
 class MainActivity : AppCompatActivity() {

@@ -1,4 +1,4 @@
-package com.example.mvvmnavigation.project_for_dagger
+package com.example.mvvmnavigation.mob_project_for_dagger
 
 import dagger.Binds
 import dagger.Component
@@ -10,7 +10,13 @@ import javax.inject.Qualifier
 
 
 @Component(modules = [AppModule::class])
-interface AppComponent
+interface AppOfComponent{
+
+    @Component.Builder
+    interface Builder {
+        fun build(): AppOfComponent
+    }
+}
 
 @Module(includes = [NetworkModule::class, AppBindModule::class])
  class AppModule

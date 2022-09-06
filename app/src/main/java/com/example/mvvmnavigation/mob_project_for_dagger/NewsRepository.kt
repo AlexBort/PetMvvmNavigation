@@ -1,4 +1,4 @@
-package com.example.mvvmnavigation.project_for_dagger
+package com.example.mvvmnavigation.mob_project_for_dagger
 
 import javax.inject.Inject
 import javax.inject.Named
