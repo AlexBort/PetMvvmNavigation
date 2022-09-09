@@ -21,7 +21,7 @@ class MainActivity : AppCompatActivity() {
         /**
          * instead of init (above commented code) we will do it another way
          */
-        appComponent.passParamsInMainActivity(this)
+//        appComponent.passParamsInMainActivity(this)
         mainBinding = ActivityMainBinding.inflate(
             layoutInflater
         )

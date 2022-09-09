@@ -1,5 +1,6 @@
 package com.example.mvvmnavigation.mob_project_for_dagger
 
+import android.content.Context
 import dagger.Binds
 import dagger.Component
 import dagger.Module
@@ -19,7 +20,10 @@ interface AppOfComponent{
 }
 
 @Module(includes = [NetworkModule::class, AppBindModule::class])
- class AppModule
+ class AppModule{
+     @Provides
+     fun provideResourceManager(context: Context) = ResourceManager(context)
+ }
 /**
  * ми видалили @Provides, і замість цього реалізовуємо @Inject в конструктарах тих класів,
  * які отримували раніше за допомогою @Provides
