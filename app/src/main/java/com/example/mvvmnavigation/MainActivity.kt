@@ -14,8 +14,8 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
-        val view = binding.root
-        setContentView(view)
+//        val view = binding.root
+        setContentView(binding.root)
         //model =        ViewModelProvider.Factory(this)
         binding.actionButton.setOnClickListener{
             model?.obtainIntent(MainScreenIntent.ClickButtonIntent)
