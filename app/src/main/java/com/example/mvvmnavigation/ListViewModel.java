@@ -1,5 +1,7 @@
 package com.example.mvvmnavigation;
 
+import android.os.Handler;
+import android.os.Looper;
 import android.util.Log;
 import androidx.lifecycle.Lifecycle.Event;
 import androidx.lifecycle.LifecycleEventObserver;
@@ -39,6 +41,9 @@ public class ListViewModel extends ViewModel implements LifecycleObserver {
     new ApiConnector().sendRequestInfoList(new ResponseCallback<ManResponse>() {
       @Override
       public void onSuccess(ManResponse response) {
+
+//        Handler(Looper.getMainLooper())
+
         users.setValue(response.getResults());
       }
 
